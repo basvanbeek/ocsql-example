@@ -96,7 +96,7 @@ func main() {
 	handler := &ochttp.Handler{Handler: router}
 
 	// add a listener for our service
-	listener, err := net.Listen("tcp", ":8000")
+	listener, err := net.Listen("tcp", ":"+port)
 	if err != nil {
 		log.Fatalf("unable to create listener: %v", err)
 	}
