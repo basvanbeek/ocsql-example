@@ -31,7 +31,8 @@ func (s *Service) ListItems(w http.ResponseWriter, r *http.Request) {
 
 	ownerID, err := strconv.ParseInt(userID, 10, 32)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+		log.Printf("invalid user_id: %v\n", err)
+		http.Error(w, "invalid user id provided", http.StatusBadRequest)
 		return
 	}
 
