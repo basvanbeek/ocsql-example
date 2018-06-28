@@ -57,6 +57,7 @@ func (s *Service) ListItems(w http.ResponseWriter, r *http.Request) {
 
 // Item holds some data
 type Item struct {
-	UserID int    `json:"user_id"`
+	ID     int64  `json:"id"`
+	UserID int64  `json:"user_id,omitempty"`
 	Name   string `json:"name"`
 }

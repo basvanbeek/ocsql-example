@@ -39,7 +39,13 @@ func (r *SQLite) Prime(ctx context.Context) (err error) {
 	}()
 
 	if _, err = r.db.ExecContext(
-		ctx, "CREATE TABLE item (user_id int, name text);",
+		ctx, "CREATE TABLE item (id INTEGER PRIMARY KEY, user_id INTEGER, name TEXT);",
+	); err != nil {
+		return
+	}
+
+	if _, err = r.db.ExecContext(
+		ctx, "CREATE UNIQUE INDEX uidx_name ON item(name);",
 	); err != nil {
 		return
 	}
@@ -85,7 +91,7 @@ func (r *SQLite) Prime(ctx context.Context) (err error) {
 // ListItems implements Repository
 func (r *SQLite) ListItems(ctx context.Context, userID int64) ([]*Item, error) {
 	rows, err := r.db.QueryContext(
-		ctx, "SELECT user_id, name FROM item WHERE user_id = ? ORDER BY name;", userID,
+		ctx, "SELECT id, name FROM item WHERE user_id = ? ORDER BY name;", userID,
 	)
 	if err != nil {
 		return nil, err
@@ -94,8 +100,8 @@ func (r *SQLite) ListItems(ctx context.Context, userID int64) ([]*Item, error) {
 
 	var items []*Item
 	for rows.Next() {
-		var item Item
-		if err = rows.Scan(&item.UserID, &item.Name); err != nil {
+		item := Item{UserID: userID}
+		if err = rows.Scan(&item.ID, &item.Name); err != nil {
 			return nil, err
 		}
 		items = append(items, &item)
