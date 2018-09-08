@@ -12,10 +12,10 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/basvanbeek/ocsql"
 	"github.com/gorilla/mux"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/oklog/run"
+	"github.com/opencensus-integrations/ocsql"
 	zipkin "github.com/openzipkin/zipkin-go"
 	zipkinhttp "github.com/openzipkin/zipkin-go/reporter/http"
 	"go.opencensus.io/exporter/prometheus"

@@ -37,6 +37,6 @@ http://localhost:8080/user/INVALID_USER_ID/items
 
 If all is well you should be able to see some generated spans at http://localhost:9411
 
-[ocsql]:(https://github.com/basvanbeek/ocsql)
+[ocsql]:(https://github.com/opencensus-integrations/ocsql)
 [zipkin]:(https://zipkin.io)
 [opencensus]:(https://opencensus.io)
